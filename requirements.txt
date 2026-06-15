@@ -1,0 +1,7 @@
+spacy 
+numpy 
+streamlit
+matplotlib
+PyPDF2
+Python-docx
+Reportlab
