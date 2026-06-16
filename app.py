@@ -485,18 +485,26 @@ def generate_pdf_report(original_text, summary, stats, keywords) -> bytes:
  
     elements = []
  
-    elements.append(Paragraph("⚡ NeuralSum AI - Summary Report", title_style))
-    elements.append(Spacer(1, 12))
+    elements.append(Paragraph("⚡ NeuralSum AI", title_style))
+    elements.append(Spacer(1, 8))
     elements.append(
         Paragraph(
-            f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-            body_style,
+            "Intelligent Text Summarization Report",
+            heading_style
         )
     )
-    elements.append(Spacer(1, 12))
- 
+    elements.append(Spacer(1, 20))
+    
     elements.append(Paragraph("Generated Summary", heading_style))
-    elements.append(Paragraph(summary.replace("\n", "<br/>"), body_style))
+    summary_sentences = summary.split(". ")
+    for sentence in summary_sentences:
+      if sentence.strip():
+        elements.append(
+            Paragraph(
+                sentence + ".",
+                body_style
+            )
+        )
     elements.append(Spacer(1, 12))
  
     elements.append(Paragraph("Document Statistics", heading_style))
@@ -508,7 +516,10 @@ def generate_pdf_report(original_text, summary, stats, keywords) -> bytes:
         ["Summary Sentences", str(stats["summary_sentences"])],
         ["Compression Ratio", f"{stats['compression_ratio']}%"],
     ]
-    table = Table(table_data, colWidths=[8 * cm, 8 * cm])
+    table = Table(
+    table_data,
+    colWidths=[220, 180]
+)
     table.setStyle(
         TableStyle(
             [
